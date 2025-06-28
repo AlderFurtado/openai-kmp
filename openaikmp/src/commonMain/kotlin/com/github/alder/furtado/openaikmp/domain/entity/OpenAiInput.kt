@@ -5,6 +5,10 @@ class OpenAiInput(
     val content: String,
     val instruction: String? = null
 ){
+    init {
+        validContent()
+        validInstruction()
+    }
 
     private fun validContent(){
         if(content.length < 2) throw ErrorContentLessThanTwoCharacters()
