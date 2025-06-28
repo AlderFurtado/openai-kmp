@@ -16,15 +16,15 @@ internal class SendContentUseCase(private val openAiRepository: OpenAiRepository
             result.content?.let {
                 return OpenAiResponse.OpenAiResponseSucceed(result.content)
             }
-            return OpenAiResponse.OpenAiResponseError(error = error.message as String)
+            return OpenAiResponse.OpenAiResponseError(error.message as String)
         }catch (e: ErrorInstructionLessThanTwoCharacters){
-            return OpenAiResponse.OpenAiResponseError(error = e.message as String)
+            return OpenAiResponse.OpenAiResponseError( e.message as String)
         }catch (e: ErrorContentLessThanTwoCharacters){
-            return OpenAiResponse.OpenAiResponseError(error = e.message as String)
+            return OpenAiResponse.OpenAiResponseError(e.message as String)
         }catch (e: HttpRequestTimeoutException){
-            return OpenAiResponse.OpenAiResponseError(error = "Error from Timeout")
+            return OpenAiResponse.OpenAiResponseError(response = "Error from Timeout")
         }catch (e: Exception){
-            return OpenAiResponse.OpenAiResponseError(error = error.message as String)
+            return OpenAiResponse.OpenAiResponseError(error.message as String)
         }
     }
 }
