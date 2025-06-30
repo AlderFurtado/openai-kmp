@@ -5,7 +5,7 @@ import com.github.alder.furtado.openaikmp.data.entity.OpenAiRequestData
 import com.github.alder.furtado.openaikmp.data.entity.OpenAiRoleData
 import com.github.alder.furtado.openaikmp.domain.entity.OpenAiInput
 
-internal object OpenAiInputToOpenAiRequestData: Mapper<OpenAiInput,OpenAiRequestData> {
+internal object OpenAiInputToOpenAiRequestDataMapper: Mapper<OpenAiInput,OpenAiRequestData> {
     override fun mapper(input: OpenAiInput): OpenAiRequestData {
         val listOpenAiInputData = mutableListOf<OpenAiInputData>()
         listOpenAiInputData.add(OpenAiInputData(role = OpenAiRoleData.USER.value, content = input.content))
