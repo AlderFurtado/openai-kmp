@@ -1,12 +1,15 @@
 package com.github.alder.furtado.openaikmp.data.repository
 
+import com.github.alder.furtado.openaikmp.data.entity.OpenAiRequestData
 import com.github.alder.furtado.openaikmp.data.entity.OpenAiResponseData
-import com.github.alder.furtado.openaikmp.data.mapper.OpenAiInputToOpenAiRequestData
-import com.github.alder.furtado.openaikmp.data.mapper.OpenAiResponseDataToOpenAiResponse
+import com.github.alder.furtado.openaikmp.data.mapper.OpenAiInputToOpenAiRequestDataMapper
+import com.github.alder.furtado.openaikmp.data.mapper.OpenAiResponseDataToOpenAiResponseMapper
 import com.github.alder.furtado.openaikmp.domain.entity.OpenAiInput
 import com.github.alder.furtado.openaikmp.domain.entity.OpenAiResponse
 import com.github.alder.furtado.openaikmp.domain.repository.OpenAiRepository
 import com.github.alder.furtado.openaikmp.infra.Http
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
 import kotlinx.serialization.json.Json
 
 internal class OpenAiRepositoryImpl(private val http: Http) : OpenAiRepository {
@@ -17,9 +20,9 @@ internal class OpenAiRepositoryImpl(private val http: Http) : OpenAiRepository {
         )
         http.addHeaders(headers)
 
-        val response = http.post("https://api.openai.com/v1/responses",
-            OpenAiInputToOpenAiRequestData.mapper(openAiInput))
-        val openAIResponseData = Json.decodeFromString<OpenAiResponseData>(response)
-        return OpenAiResponseDataToOpenAiResponse.mapper(openAIResponseData)
+        val response = http.post<OpenAiRequestData,HttpResponse>("https://api.openai.com/v1/responses",
+            OpenAiInputToOpenAiRequestDataMapper.mapper(openAiInput))
+        val openAIResponseData = Json.decodeFromString<OpenAiResponseData>(response.bodyAsText())
+        return OpenAiResponseDataToOpenAiResponseMapper.mapper(openAIResponseData)
     }
 }
