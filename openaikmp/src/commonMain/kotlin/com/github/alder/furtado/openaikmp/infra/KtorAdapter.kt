@@ -39,7 +39,7 @@ internal class KtorAdapter : Http {
     }
 
 
-    override suspend fun <I> post(url: String, body: I):String {
+    override suspend fun <I,HttpResponse> post(url: String, body: I):HttpResponse {
         val response = client().post(url){
             headers {
                 headersLocal.forEach {
@@ -51,6 +51,6 @@ internal class KtorAdapter : Http {
             println(it)
         }
 
-        return response.bodyAsText()
+        return response as HttpResponse
     }
 }
