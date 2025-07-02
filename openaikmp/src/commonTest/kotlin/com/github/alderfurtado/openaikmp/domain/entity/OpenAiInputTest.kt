@@ -1,7 +1,7 @@
-package com.github.alderfurtado.openaikmp.domain
+package com.github.alderfurtado.openaikmp.domain.entity
 
-import com.github.alder.furtado.openaikmp.domain.entity.ErrorContentLessThanTwoCharacters
-import com.github.alder.furtado.openaikmp.domain.entity.ErrorInstructionLessThanTwoCharacters
+import com.github.alder.furtado.openaikmp.domain.entity.error.ErrorContentLessThanTwoCharacters
+import com.github.alder.furtado.openaikmp.domain.entity.error.ErrorInstructionLessThanTwoCharacters
 import com.github.alder.furtado.openaikmp.domain.entity.OpenAiInput
 import com.github.alder.furtado.openaikmp.domain.entity.OpenAiModel
 import kotlin.test.Test

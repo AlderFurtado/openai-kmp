@@ -1,5 +1,8 @@
 package com.github.alder.furtado.openaikmp.domain.entity
 
+import com.github.alder.furtado.openaikmp.domain.entity.error.ErrorContentLessThanTwoCharacters
+import com.github.alder.furtado.openaikmp.domain.entity.error.ErrorInstructionLessThanTwoCharacters
+
 class OpenAiInput(
     val openAiModel: OpenAiModel = OpenAiModel.GPT_4O,
     val content: String,

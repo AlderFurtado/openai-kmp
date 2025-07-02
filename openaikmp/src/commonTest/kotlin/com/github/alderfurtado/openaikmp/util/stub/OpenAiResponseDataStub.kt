@@ -1,4 +1,4 @@
-package com.github.alderfurtado.openaikmp.data.mapper.stub
+package com.github.alderfurtado.openaikmp.util.stub
 
 import com.github.alder.furtado.openaikmp.data.entity.Content
 import com.github.alder.furtado.openaikmp.data.entity.Format

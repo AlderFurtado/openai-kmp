@@ -1,8 +1,8 @@
 package com.github.alder.furtado.openaikmp.domain.usecase
 
-import com.github.alder.furtado.openaikmp.domain.entity.ErrorContentLessThanTwoCharacters
-import com.github.alder.furtado.openaikmp.domain.entity.ErrorInstructionLessThanTwoCharacters
-import com.github.alder.furtado.openaikmp.domain.entity.ErrorUnknown
+import com.github.alder.furtado.openaikmp.domain.entity.error.ErrorContentLessThanTwoCharacters
+import com.github.alder.furtado.openaikmp.domain.entity.error.ErrorInstructionLessThanTwoCharacters
+import com.github.alder.furtado.openaikmp.domain.entity.error.ErrorUnknown
 import com.github.alder.furtado.openaikmp.domain.entity.OpenAiInput
 import com.github.alder.furtado.openaikmp.domain.entity.OpenAiResponse
 import com.github.alder.furtado.openaikmp.domain.repository.OpenAiRepository
@@ -21,6 +21,7 @@ internal class SendContentUseCase(private val openAiRepository: OpenAiRepository
             return OpenAiResponse.OpenAiResponseError( e.message as String)
         }catch (e: ErrorContentLessThanTwoCharacters){
             return OpenAiResponse.OpenAiResponseError(e.message as String)
+            //TODO create a own ErrorResourceNotFound
         }catch (e: HttpRequestTimeoutException){
             return OpenAiResponse.OpenAiResponseError(response = "Error from Timeout")
         }catch (e: Exception){

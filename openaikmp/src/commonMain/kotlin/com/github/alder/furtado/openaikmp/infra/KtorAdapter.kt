@@ -1,13 +1,19 @@
 package com.github.alder.furtado.openaikmp.infra
 
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
+import io.ktor.http.Headers
+import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
+
+open class HttpResponseLocal(val content: Any?, val statusCode: HttpStatusCode, val headers: Headers?)
+
 internal class KtorAdapter : Http {
 
     private lateinit var headersLocal: MutableMap<String, String>
@@ -39,7 +45,7 @@ internal class KtorAdapter : Http {
     }
 
 
-    override suspend fun <I,HttpResponse> post(url: String, body: I):HttpResponse {
+    override suspend fun <I,HttpResponseLocal> post(url: String, body: I):HttpResponseLocal {
         val response = client().post(url){
             headers {
                 headersLocal.forEach {
@@ -51,6 +57,12 @@ internal class KtorAdapter : Http {
             println(it)
         }
 
-        return response as HttpResponse
+        val responseLocal = HttpResponseLocal(
+            content = response.body(),
+            statusCode = response.status,
+            headers = response.headers
+        )
+
+        return responseLocal as HttpResponseLocal
     }
 }

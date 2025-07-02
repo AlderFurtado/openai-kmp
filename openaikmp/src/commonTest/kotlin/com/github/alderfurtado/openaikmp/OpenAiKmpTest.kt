@@ -11,8 +11,8 @@ class OpenAiKmpTest {
 
     @Test
     fun test() = runBlocking{
-//        val teste = OpenAiKmp().sendContent(""OpenAiInput(openAiModel = OpenAiModel.GPT_4O,"Quem descobriu o Brasil", instruction = "Talks as History teacher"),"token")
-//        println(teste.content)
-//        assertEquals(false,false)
+        val teste = OpenAiKmp().sendContent(OpenAiInput(openAiModel = OpenAiModel.GPT_4O,"Quem descobriu o Brasil", instruction = "Talks as History teacher"),"token")
+        println(teste.content)
+        assertEquals(false,false)
     }
 }

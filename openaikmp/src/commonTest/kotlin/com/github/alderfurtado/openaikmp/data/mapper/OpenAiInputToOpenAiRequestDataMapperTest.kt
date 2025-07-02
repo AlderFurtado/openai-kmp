@@ -1,7 +1,7 @@
 package com.github.alderfurtado.openaikmp.data.mapper
 
 import com.github.alder.furtado.openaikmp.data.mapper.OpenAiInputToOpenAiRequestDataMapper
-import com.github.alderfurtado.openaikmp.data.mapper.stub.OpenAiInputStub
+import com.github.alderfurtado.openaikmp.util.stub.OpenAiInputStub
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
