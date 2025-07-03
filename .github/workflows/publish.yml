@@ -1,9 +1,17 @@
 # .github/workflows/publish.yml
 
 name: Publish
+
 on:
-  release:
-    workflow_dispatch: [released, prereleased]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Ambiente (staging ou production)'
+        required: true
+        default: 'staging'
+      version:
+        description: 'Versão/tag para deploy'
+        required: false
 jobs:
   publish:
     name: Release build and publish
