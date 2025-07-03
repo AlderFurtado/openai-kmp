@@ -58,7 +58,7 @@ internal class KtorAdapter : Http {
         }
 
         val responseLocal = HttpResponseLocal(
-            content = response.body(),
+            content = response.bodyAsText(),
             statusCode = response.status,
             headers = response.headers
         )

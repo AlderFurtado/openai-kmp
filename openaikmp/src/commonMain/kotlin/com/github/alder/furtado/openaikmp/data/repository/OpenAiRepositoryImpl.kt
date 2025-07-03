@@ -12,6 +12,7 @@ import com.github.alder.furtado.openaikmp.domain.entity.error.ErrorInternalServe
 import com.github.alder.furtado.openaikmp.domain.repository.OpenAiRepository
 import com.github.alder.furtado.openaikmp.infra.Http
 import com.github.alder.furtado.openaikmp.infra.HttpResponseLocal
+import kotlinx.serialization.json.Json
 
 internal class OpenAiRepositoryImpl(private val http: Http) : OpenAiRepository {
 
@@ -33,7 +34,7 @@ internal class OpenAiRepositoryImpl(private val http: Http) : OpenAiRepository {
 
         if(response.statusCode.value == 500) throw ErrorInternalServer()
 
-        val openAIResponseData = response.content as OpenAiResponseData
+        val openAIResponseData  = Json.decodeFromString<OpenAiResponseData>(response.content.toString())
         return OpenAiResponseDataToOpenAiResponseMapper.mapper(openAIResponseData)
     }
 }
