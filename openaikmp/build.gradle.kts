@@ -75,7 +75,7 @@ mavenPublishing {
     coordinates(
         groupId = "io.github.alderfurtado",
         artifactId = "openaikmp",
-        version = "1.0.0"
+        version = "1.0.1"
     )
 
     // Configure POM metadata for the published artifact
